@@ -19,7 +19,7 @@ $(document).ready(function () {
         var status = {
             offline: {
                 header: "Offline",
-                message: "Reach for the unreachable &mdash; advice for life, but not for networks.",
+                message: "Please notify a poll worker. Do not insert ballots into this machine.",
                 color: "#FFFFFF",       // White
                 background: "#212121",   // Grey 900
                 primary: "1",
@@ -27,8 +27,8 @@ $(document).ready(function () {
                 divider: ".5"
             },
             waiting: {
-                header: "Waiting",
-                message: "Place your ballot in the tray.",
+                header: "Insert your unfolded ballot into the top slot.",
+                message: "",
                 color: "#000000",       // Black
                 background: "#FFFFFF",   // White
                 primary: ".87",
@@ -36,8 +36,8 @@ $(document).ready(function () {
                 divider: ".38"
             },
             pending: {
-                header: "Pending",
-                message: "Have some tea. We'll just be a moment.",
+                header: "Please wait...",
+                message: "",
                 color: "#FFFFFF",       // White
                 background: "#616161",   // Grey 700
                 primary: "1",
@@ -45,8 +45,8 @@ $(document).ready(function () {
                 divider: ".5"
             },
             accept: {
-                header: "Accept",
-                message: "Your ballot was cast.",
+                header: "Your ballot was cast.",
+                message: "",
                 color: "#FFFFFF",       // White
                 background: "#388E3C",   // Green 700
                 primary: "1",
@@ -54,7 +54,7 @@ $(document).ready(function () {
                 divider: "1"
             },
             reject: {
-                header: "Reject",
+                header: "Your ballot was not recognized. Only insert unfolded ballots.",
                 message: "This ballot was invalid.",
                 color: "#FFFFFF",       // White
                 background: "#F44336",   // Red 500
