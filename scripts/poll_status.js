@@ -55,7 +55,7 @@ $(document).ready(function () {
             },
             reject: {
                 header: "Your ballot was not recognized. Only insert unfolded ballots.",
-                message: "This ballot was invalid.",
+                message: "",
                 color: "#FFFFFF",       // White
                 background: "#F44336",   // Red 500
                 primary: "1",
