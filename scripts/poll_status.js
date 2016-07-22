@@ -18,14 +18,15 @@ $(document).ready(function () {
     function displayStatus() {
         var status = {
             offline: {
-                header: "Offline",
-                message: "Please notify a poll worker. Do not insert ballots into this machine.",
+                header: "Please insert your ballot.",
+                message: "",
                 color: "#FFFFFF",       // White
                 background: "#212121",   // Grey 900
                 primary: "1",
                 secondary: ".7",
                 divider: ".5",
-				fontsize: "96px"
+				fontsize: "128px",
+				paddingtop: "76px"
             },
             waiting: {
                 header: "Please insert your ballot.",
@@ -35,7 +36,8 @@ $(document).ready(function () {
                 primary: ".87",
                 secondary: ".54",
                 divider: ".38",
-				fontsize: "128px"
+				fontsize: "128px",
+				paddingtop: "76px"
             },
             pending: {
                 header: "",
@@ -54,7 +56,8 @@ $(document).ready(function () {
                 primary: "1",
                 secondary: "1",
                 divider: "1",
-				fontsize: "128px"
+				fontsize: "128px",
+				paddingtop: "82px"
             },
             reject: {
                 header: "Your ballot was not recognized. Only insert unfolded ballots.",
@@ -64,7 +67,8 @@ $(document).ready(function () {
                 primary: "1",
                 secondary: "1",
                 divider: "1",
-				fontsize: "80px"
+				fontsize: "80px",
+				paddingtop: "90px"
             }
         };
 
@@ -115,6 +119,7 @@ $(document).ready(function () {
             primary.css({"opacity": status[response].primary});
             secondary.css({"opacity": status[response].secondary});
 			primary.css({"font-size": status[response].fontsize});
+			primary.css({"padding-top": status[response].paddingtop});
 
             if (previousResponse == response) {
                 // console.log("Match.");
