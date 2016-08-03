@@ -13,6 +13,8 @@ $(document).ready(function () {
 
     var previousResponse = "offline";
 
+
+	
     displayStatus();
 
     function displayStatus() {
@@ -63,38 +65,20 @@ $(document).ready(function () {
                 divider: "1"
             }
         };
+		
+		var connection = new WebSocket('ws://localhost:4444/status');
 
-        $.ajax({
-            method: 'GET',
-            url: 'http://applepi.cs.rice.edu/status',
-            contentType: 'text/plain',
-
-            xhrFields: {
-                withCredentials: false
-            }
-        })
-            .done(function (data) {
-                // console.log(data);
-                if (data.indexOf("waiting") >= 0) {
-                    setStatus("waiting");
-                }
-                else if (data.indexOf("pending") >= 0) {
-                    setStatus("pending");
-                }
-                else if (data.indexOf("accept") >= 0) {
-                    setStatus("accept");
-                }
-                else if (data.indexOf("reject") >= 0) {
-                    setStatus("reject");
-                }
-            })
-
-            .fail(function () {
-                setStatus("offline");
-            })
-            .always(function () {
-                displayStatus();
-            });
+		connection.onopen = function () {
+			connection.send("ACK");
+		};
+		
+		connection.onerror = function (error) {
+			console.log('WebSocket error ' + error);
+		};
+		
+        connection.onmessage = function (msg) {
+			setStatus(msg.data);
+		};
 
         function setStatus(response) {
             // response = "reject";
