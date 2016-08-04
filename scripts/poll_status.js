@@ -20,25 +20,29 @@ $(document).ready(function () {
     function displayStatus() {
         var status = {
             offline: {
-                header: "Offline",
-                message: "Please notify a poll worker. Do not insert ballots into this machine.",
+                header: "Please insert your ballot.",
+                message: "",
                 color: "#FFFFFF",       // White
                 background: "#212121",   // Grey 900
                 primary: "1",
                 secondary: ".7",
-                divider: ".5"
+                divider: ".5",
+				fontsize: "128px",
+				paddingtop: "76px"
             },
             waiting: {
-                header: "Insert your unfolded ballot into the top slot.",
+                header: "Please insert your ballot.",
                 message: "",
                 color: "#000000",       // Black
                 background: "#FFFFFF",   // White
                 primary: ".87",
                 secondary: ".54",
-                divider: ".38"
+                divider: ".38",
+				fontsize: "128px",
+				paddingtop: "76px"
             },
             pending: {
-                header: "Please wait...",
+                header: "",
                 message: "",
                 color: "#FFFFFF",       // White
                 background: "#616161",   // Grey 700
@@ -47,13 +51,15 @@ $(document).ready(function () {
                 divider: ".5"
             },
             accept: {
-                header: "Your ballot was cast.",
+                header: "Your ballot was cast!",
                 message: "",
                 color: "#FFFFFF",       // White
                 background: "#388E3C",   // Green 700
                 primary: "1",
                 secondary: "1",
-                divider: "1"
+                divider: "1",
+				fontsize: "128px",
+				paddingtop: "82px"
             },
             reject: {
                 header: "Your ballot was not recognized. Only insert unfolded ballots.",
@@ -62,7 +68,9 @@ $(document).ready(function () {
                 background: "#F44336",   // Red 500
                 primary: "1",
                 secondary: "1",
-                divider: "1"
+                divider: "1",
+				fontsize: "80px",
+				paddingtop: "90px"
             }
         };
 		
@@ -94,6 +102,8 @@ $(document).ready(function () {
             $("h3, p, .text-divider.xxlarge::after").css({"color": status[response].color});
             primary.css({"opacity": status[response].primary});
             secondary.css({"opacity": status[response].secondary});
+			primary.css({"font-size": status[response].fontsize});
+			primary.css({"padding-top": status[response].paddingtop});
 
             if (previousResponse == response) {
                 // console.log("Match.");
