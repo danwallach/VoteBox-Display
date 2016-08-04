@@ -88,6 +88,35 @@ $(document).ready(function () {
 			setStatus(msg.data);
 		};
 
+		$.ajax({
+            method: 'GET',
+            url: 'http://applepi.cs.rice.edu/status',
+            contentType: 'text/plain',
+
+            xhrFields: {
+                withCredentials: false
+            }
+        })
+            .done(function (data) {
+                // console.log(data);
+                if (data.indexOf("waiting") >= 0) {
+                    setStatus("waiting");
+                }
+                else if (data.indexOf("pending") >= 0) {
+                    setStatus("pending");
+                }
+                else if (data.indexOf("accept") >= 0) {
+                    setStatus("accept");
+                }
+                else if (data.indexOf("reject") >= 0) {
+                    setStatus("reject");
+                }
+            })
+
+            .fail(function () {
+                setStatus("offline");
+            })
+		
         function setStatus(response) {
             // response = "reject";
 
