@@ -82,10 +82,16 @@ $(document).ready(function () {
 		
 		connection.onerror = function (error) {
 			console.log('WebSocket error ' + error);
+			setStatus("offline");
 		};
 		
         connection.onmessage = function (msg) {
 			setStatus(msg.data);
+		};
+		
+		connection.onclose = function (close) {
+			// setStatus("offline");
+			setTimeout(displayStatus, 1000);
 		};
 
 		$.ajax({
@@ -115,7 +121,7 @@ $(document).ready(function () {
 
             .fail(function () {
                 setStatus("offline");
-            })
+            });
 		
         function setStatus(response) {
             // response = "reject";
