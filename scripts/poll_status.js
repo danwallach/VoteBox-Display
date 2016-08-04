@@ -66,7 +66,7 @@ $(document).ready(function () {
             }
         };
 		
-		var connection = new WebSocket('ws://localhost:4444/status');
+		var connection = new WebSocket('ws://applepi.cs.rice.edu/pushstatus');
 
 		connection.onopen = function () {
 			connection.send("ACK");
