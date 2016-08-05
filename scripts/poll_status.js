@@ -74,7 +74,7 @@ $(document).ready(function () {
             }
         };
 		
-		var connection = new WebSocket('ws://applepi.cs.rice.edu/pushstatus');
+		var connection = new WebSocket('ws://applepi.cs.rice.edu:7654/pushstatus');
 
 		connection.onopen = function () {
 			connection.send("ACK");
@@ -96,7 +96,7 @@ $(document).ready(function () {
 
 		$.ajax({
             method: 'GET',
-            url: 'http://applepi.cs.rice.edu/status',
+            url: 'http://applepi.cs.rice.edu:7654/status',
             contentType: 'text/plain',
 
             xhrFields: {
