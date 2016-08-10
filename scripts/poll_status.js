@@ -2,14 +2,18 @@
  * Created by brian on 6/24/16.
  */
 $(document).ready(function () {
-    var acceptSound = document.createElement('audio');
-    acceptSound.setAttribute('src', 'audio/success.wav');
-    acceptSound.setAttribute('autoplay', 'autoplay');
+    // var acceptSound = document.createElement('audio');
+    // acceptSound.setAttribute('src', 'audio/success.ogg');
+    // acceptSound.setAttribute('autoplay', 'autoplay');
+	//acceptSound.setAttribute('type', 'audio/ogg');
 
-    var rejectSound = document.createElement('audio');
-    rejectSound.setAttribute('src', 'audio/reject.wav');
-    rejectSound.setAttribute('autoplay', 'autoplay');
+    // var rejectSound = document.createElement('audio');
+    // rejectSound.setAttribute('src', 'audio/reject.ogg');
+    // rejectSound.setAttribute('autoplay', 'autoplay');
+	//rejectSound.setAttribute('type', 'audio/ogg');
 
+	var acceptSound = document.getElementById('acceptSound');
+	var rejectSound = document.getElementById('rejectSound');
 
     var previousResponse = "offline";
 
@@ -149,6 +153,8 @@ $(document).ready(function () {
                 }
                 else if (response == "reject") {
                     rejectSound.play();
+					rejectVlc.play();
+					rejectVlc.playlist.play();
                 }
             }
 
