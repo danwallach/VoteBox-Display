@@ -20,10 +20,10 @@ $(document).ready(function () {
     function displayStatus() {
         var status = {
             offline: {
-                header: "Please insert your ballot.",
+                header: "Use next machine.",
                 message: "",
                 color: "#FFFFFF",       // White
-                background: "#212121",   // Grey 900
+                background: "#F44336",   // Red
                 primary: "1",
                 secondary: ".7",
                 divider: ".5",
