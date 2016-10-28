@@ -2,56 +2,68 @@
  * Created by brian on 6/24/16.
  */
 $(document).ready(function () {
-    var acceptSound = document.createElement('audio');
-    acceptSound.setAttribute('src', 'audio/success.wav');
-    acceptSound.setAttribute('autoplay', 'autoplay');
+    // var acceptSound = document.createElement('audio');
+    // acceptSound.setAttribute('src', 'audio/success.ogg');
+    // acceptSound.setAttribute('autoplay', 'autoplay');
+	//acceptSound.setAttribute('type', 'audio/ogg');
 
-    var rejectSound = document.createElement('audio');
-    rejectSound.setAttribute('src', 'audio/reject.wav');
-    rejectSound.setAttribute('autoplay', 'autoplay');
+    // var rejectSound = document.createElement('audio');
+    // rejectSound.setAttribute('src', 'audio/reject.ogg');
+    // rejectSound.setAttribute('autoplay', 'autoplay');
+	//rejectSound.setAttribute('type', 'audio/ogg');
 
+	var acceptSound = document.getElementById('acceptSound');
+	var rejectSound = document.getElementById('rejectSound');
 
     var previousResponse = "offline";
 
+
+	
     displayStatus();
 
     function displayStatus() {
         var status = {
             offline: {
-                header: "Offline",
-                message: "Please notify a poll worker. Do not insert ballots into this machine.",
+                header: "Use next machine.",
+                message: "",
                 color: "#FFFFFF",       // White
-                background: "#212121",   // Grey 900
+                background: "#F44336",   // Red
                 primary: "1",
                 secondary: ".7",
-                divider: ".5"
+                divider: ".5",
+				fontsize: "128px",
+				paddingtop: "76px"
             },
             waiting: {
-                header: "Insert your unfolded ballot into the top slot.",
+                header: "Please insert your ballot.",
                 message: "",
                 color: "#000000",       // Black
                 background: "#FFFFFF",   // White
                 primary: ".87",
                 secondary: ".54",
-                divider: ".38"
+                divider: ".38",
+				fontsize: "128px",
+				paddingtop: "76px"
             },
             pending: {
-                header: "Please wait...",
+                header: "Blah blah blah blah",
                 message: "",
-                color: "#FFFFFF",       // White
+                color: "#616161",       // White
                 background: "#616161",   // Grey 700
                 primary: "1",
                 secondary: ".7",
                 divider: ".5"
             },
             accept: {
-                header: "Your ballot was cast.",
+                header: "Your ballot was cast!",
                 message: "",
                 color: "#FFFFFF",       // White
                 background: "#388E3C",   // Green 700
                 primary: "1",
                 secondary: "1",
-                divider: "1"
+                divider: "1",
+				fontsize: "128px",
+				paddingtop: "82px"
             },
             reject: {
                 header: "Your ballot was not recognized. Only insert unfolded ballots.",
@@ -60,13 +72,35 @@ $(document).ready(function () {
                 background: "#F44336",   // Red 500
                 primary: "1",
                 secondary: "1",
-                divider: "1"
+                divider: "1",
+				fontsize: "80px",
+				paddingtop: "90px"
             }
         };
+		
+		var connection = new WebSocket('ws://raspberrypi.local:7654/pushstatus');
 
-        $.ajax({
+		connection.onopen = function () {
+			connection.send("ACK");
+		};
+		
+		connection.onerror = function (error) {
+			console.log('WebSocket error ' + error);
+			setStatus("offline");
+		};
+		
+        connection.onmessage = function (msg) {
+			setStatus(msg.data);
+		};
+		
+		connection.onclose = function (close) {
+			// setStatus("offline");
+			setTimeout(displayStatus, 1000);
+		};
+
+		$.ajax({
             method: 'GET',
-            url: 'http://applepi.cs.rice.edu/status',
+            url: 'http://raspberrypi.local:7654/status',
             contentType: 'text/plain',
 
             xhrFields: {
@@ -91,11 +125,8 @@ $(document).ready(function () {
 
             .fail(function () {
                 setStatus("offline");
-            })
-            .always(function () {
-                displayStatus();
             });
-
+		
         function setStatus(response) {
             // response = "reject";
 
@@ -110,6 +141,8 @@ $(document).ready(function () {
             $("h3, p, .text-divider.xxlarge::after").css({"color": status[response].color});
             primary.css({"opacity": status[response].primary});
             secondary.css({"opacity": status[response].secondary});
+			primary.css({"font-size": status[response].fontsize});
+			primary.css({"padding-top": status[response].paddingtop});
 
             if (previousResponse == response) {
                 // console.log("Match.");
@@ -120,6 +153,8 @@ $(document).ready(function () {
                 }
                 else if (response == "reject") {
                     rejectSound.play();
+					rejectVlc.play();
+					rejectVlc.playlist.play();
                 }
             }
 

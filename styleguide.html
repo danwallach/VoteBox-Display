@@ -9,6 +9,7 @@
     <meta itemprop=description content="Visual style guide used by this site.">
     <link rel=stylesheet href=styles/components.css>
     <title>Visual Style Guide — Web Starter Kit</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body class=page--styleguide>
 <div class=code-sample>
@@ -21,6 +22,34 @@
         </div>
     </section>
 </div>
+<audio id="rejectSound">
+	<source src="audio/reject.ogg" type="audio/ogg">
+</audio>
+<audio id="acceptSound">
+	<source src="audio/success.ogg" type="audio/ogg">
+</audio>
+<button id="goFS">Go fullscreen</button>
+<script>
+    document.getElementById('goFS').addEventListener('click', () => {
+        if (document.fullscreenEnabled) {
+        requestFullscreen(document.documentElement);
+    } else {
+        // Ignore or do something else
+    }
+    });
+
+    document.fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.documentElement.webkitRequestFullScreen;
+
+    function requestFullscreen(element) {
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+    }
+</script>
 <script src="node_modules/jquery/dist/jquery.js"></script>
 <script src="./scripts/poll_status.js"></script>
 </body>
