@@ -546,7 +546,7 @@ pre {
 }
 
 .highlight-module__title {
-    font-family: "Roboto Condensed", Helvetica, sans-serif;
+    font-family: 'Open Sansa', sans-serif;
     font-size: 68px;
     font-weight: 300;
     line-height: 1.1471em;
@@ -556,7 +556,7 @@ pre {
 
 @media only screen and (min-width: 800px) {
     .highlight-module__title {
-        font-family: "Roboto Condensed", Helvetica, sans-serif;
+        font-family: 'Open Sans', sans-serif;
         font-size: 110px;
         font-weight: 300;
         line-height: 1.19em;
@@ -1789,7 +1789,7 @@ h1, h2, h3, h4, h5, p {
 
 @media only screen and (min-width: 800px) {
     .xxlarge, h1 {
-        font-family: "Roboto Condensed", Helvetica, sans-serif;
+        font-family: 'Open Sans', sans-serif;
         font-size: 68px;
         font-weight: 300;
         line-height: 1.1471em;

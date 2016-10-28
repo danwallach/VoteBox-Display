@@ -46,9 +46,9 @@ $(document).ready(function () {
 				paddingtop: "76px"
             },
             pending: {
-                header: "",
+                header: "Blah blah blah blah",
                 message: "",
-                color: "#FFFFFF",       // White
+                color: "#616161",       // White
                 background: "#616161",   // Grey 700
                 primary: "1",
                 secondary: ".7",
@@ -78,7 +78,7 @@ $(document).ready(function () {
             }
         };
 		
-		var connection = new WebSocket('ws://127.0.0.1:7654/pushstatus');
+		var connection = new WebSocket('ws://raspberrypi.local:7654/pushstatus');
 
 		connection.onopen = function () {
 			connection.send("ACK");
@@ -100,7 +100,7 @@ $(document).ready(function () {
 
 		$.ajax({
             method: 'GET',
-            url: 'http://127.0.0.1:7654/status',
+            url: 'http://raspberrypi.local:7654/status',
             contentType: 'text/plain',
 
             xhrFields: {
